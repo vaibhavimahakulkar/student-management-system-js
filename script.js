@@ -3,7 +3,14 @@ console.log("Welcome to Student Management System!");
 console.log("----------------------------------------");
 
 while(true){
-let feature = Number(prompt("Enter\n1.Add Student\n2.View Student\n3.Search Student\n4.Update Student\n5.Delete Student\n6.Show Topper\n7.Exit"));
+let feature = Number(prompt(`Enter
+  1.Add Student
+  2.View Student
+  3.Search Student
+  4.Update Student
+  5.Delete Student
+  6.Show Topper
+  7.Exit`));
 
 switch(feature){
   case 1 : 
@@ -26,6 +33,7 @@ switch(feature){
     break;
   case 7 :
     console.log("Thank you for using Student Management System!");
+    break;
   default :
     console.log("Please Enter the option from the given list only");
 }
@@ -35,7 +43,7 @@ if(feature === 7){
 }
 }
 
-function addStudent(){
+const addStudent = () => {
 let ans = "yes";
 while(ans === "yes"){
 let student = {
@@ -49,29 +57,36 @@ ans = (prompt("Do you want to add data of another student?")).toLowerCase();
 }
 }
 
-function viewAllStudent(){
+const viewAllStudent = () => {
 if(students.length === 0){
   console.log("No Students available!");
+  return;
 }
 for(let i = 0; i<students.length; i++){
-  console.log("Student"+ (i+1));
-  console.log("------------------------");
-  console.log("Name: "+students[i].name);
-  console.log("Age: "+students[i].age);
-  console.log("Cgpa: "+students[i].cgpa);
-  console.log("------------------------");
+  const {name, age, cgpa} = students[i];
+  console.log(`
+    Student ${i+1}
+    -------------------------------
+    Name : ${name}
+    Age : ${age}
+    Cgpa : ${cgpa};
+    -------------------------------
+    `)
 }
 }
 
-
-function searchStudent(){
+const searchStudent = () => {
   let whichStudent = prompt("Enter the student name you want details about:");
   let found = false;
   for(let i=0; i<students.length; i++){
     if((whichStudent).toLowerCase() === (students[i].name).toLowerCase()){
-      console.log("Name: "+students[i].name);
-      console.log("Age: "+students[i].age);
-      console.log("Cgpa: "+students[i].cgpa);
+      const {name, age, cgpa} = students[i];
+      console.log(`
+      Name : ${name}
+      Age : ${age}
+      Cgpa : ${cgpa}`);
+
+
       found = true;
       break;
     }
@@ -84,7 +99,7 @@ function searchStudent(){
 }
 
 
-function updateStudent(){
+const updateStudent = () => {
 let whichStudent = prompt("Enter the student name you want update:");
   let found = false;
   for(let i=0; i<students.length; i++){
@@ -120,7 +135,7 @@ let whichStudent = prompt("Enter the student name you want update:");
   }
 }
 
-function deleteStudent(){
+const deleteStudent = () => {
   let whichStudent = prompt("Enter the student name you want to remove:");
   let found = false;
   for(let i=0; i<students.length; i++){
@@ -140,7 +155,7 @@ function deleteStudent(){
 
 }
 
-function showTopper(){
+const showTopper = () => {
   if (students.length === 0) {
     console.log("No students available.");
     return;
@@ -152,9 +167,11 @@ function showTopper(){
     }
     
   }
-  console.log("The topper is:");
-  console.log("Name: "+topper.name);
-  console.log("Age: "+topper.age);
-  console.log("Cgpa: "+topper.cgpa);
+  const {name, age, cgpa} = topper;
+  console.log(`
+  The topper is:
+  Name : ${name}
+  Age : ${age}
+  Cgpa : ${cgpa} `);
 
 }
